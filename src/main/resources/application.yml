@@ -24,8 +24,9 @@ featureflags:
   # UI: https://app.harness.io/cf/admin/features?accountIdentifier=H6rHO8vtQYKelD_wgjnMpA&orgIdentifier=N4C&projectIdentifier=DVR
   serverSdkKey: ${FF_SERVER_SDK_KEY:61ba7575-c3ac-4b33-ba33-15310bc76a4c}
   # Optional: Override Harness SaaS endpoints if you run Relay Proxy
-  # configUrl: http://localhost:7000
-  # eventUrl: http://localhost:7000
+  # Default API endpoints (do NOT use UI URLs - these are correct):
+  # configUrl: https://config.ff.harness.io/api/1.0
+  # eventUrl: https://events.ff.harness.io/api/1.0
   streamEnabled: true
   pollIntervalSeconds: 60
   analyticsEnabled: true

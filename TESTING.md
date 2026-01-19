@@ -37,11 +37,6 @@ curl http://localhost:8080/actuator/health
 }
 ```
 
-### Check Feature Flags Health Specifically
-```bash
-curl http://localhost:8080/actuator/health/featureflags
-```
-
 ## 2. Feature Flag Evaluation Tests
 
 ### Test 1: Read a Feature Flag (GET)
@@ -53,11 +48,7 @@ curl http://localhost:8080/api/flags/your-flag-id
 **Expected Response:**
 - `true` or `false` (boolean value)
 
-**Example:**
-```bash
-curl http://localhost:8080/api/flags/darkmode
-# Returns: true or false
-```
+
 
 ### Test 2: Read Multiple Flags
 ```bash
@@ -78,10 +69,6 @@ curl -X POST http://localhost:8080/api/admin/flags/your-flag-id/refresh
 **Expected Response:**
 - `true` or `false` (latest value from SDK)
 
-**Example:**
-```bash
-curl -X POST http://localhost:8080/api/admin/flags/darkmode/refresh
-```
 
 ## 4. Real-Time Flag Update Testing
 
@@ -285,13 +272,6 @@ done | awk '{sum+=$1; count++} END {print "Average:", sum/count, "seconds"}'
 | `/api/flags/{flagId}` | GET | Read flag value (cached) |
 | `/api/admin/flags/{flagId}/refresh` | POST | Force cache refresh |
 | `/actuator/health` | GET | Application health |
-| `/actuator/health/featureflags` | GET | Feature flags health |
 
-## Next Steps
 
-1. Create flags in your Harness project
-2. Test with real flag identifiers
-3. Monitor logs during flag changes
-4. Verify streaming updates work in real-time
-5. Test cache refresh functionality
 
