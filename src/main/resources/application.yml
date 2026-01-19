@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: feature-flags-starter
+  cache:
+    cache-names: flags
+    caffeine:
+      # Note: SDK maintains its own cache updated via SSE in real-time
+      # This app-level cache is an additional optimization layer
+      # Shorter TTL (10s) ensures flag changes propagate faster
+      spec: maximumSize=10000,expireAfterWrite=10s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  health:
+    featureflags:
+      enabled: true
+
+featureflags:
+  # REQUIRED: Server SDK key for Harness FF (backend only; do NOT expose to clients)
+  # Project: accountIdentifier=H6rHO8vtQYKelD_wgjnMpA, orgIdentifier=N4C, projectIdentifier=DVR
+  # UI: https://app.harness.io/cf/admin/features?accountIdentifier=H6rHO8vtQYKelD_wgjnMpA&orgIdentifier=N4C&projectIdentifier=DVR
+  serverSdkKey: ${FF_SERVER_SDK_KEY:61ba7575-c3ac-4b33-ba33-15310bc76a4c}
+  # Optional: Override Harness SaaS endpoints if you run Relay Proxy
+  # configUrl: http://localhost:7000
+  # eventUrl: http://localhost:7000
+  streamEnabled: true
+  pollIntervalSeconds: 60
+  analyticsEnabled: true
+
+# Example: flag identifiers you commonly read
+ff:
+  flags:
+    darkMode: darkmode
+
+logging:
+  level:
+    com.example.ffstarter: INFO
+    io.harness.cf: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
